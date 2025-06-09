@@ -12,7 +12,7 @@ exports.crearPago = async (req, res) => {
 
 exports.obtenerPagos = async (req, res) => {
   try {
-    const pagos = await Pago.find().populate('vehiculo');
+    const pagos = await Pago.find().populate('vehiculo', 'placa');
     res.json(pagos);
   } catch (error) {
     res.status(500).json({ mensaje: 'Error al obtener pagos', error });
@@ -21,7 +21,7 @@ exports.obtenerPagos = async (req, res) => {
 
 exports.obtenerPago = async (req, res) => {
   try {
-    const pago = await Pago.findById(req.params.id).populate('vehiculo');
+    const pago = await Pago.findById(req.params.id).populate('vehiculo', 'placa');
     if (!pago) return res.status(404).json({ mensaje: 'Pago no encontrado' });
     res.json(pago);
   } catch (error) {
